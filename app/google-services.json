@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "516943517371",
+    "firebase_url": "https://nomadesk-8669b.firebaseio.com",
+    "project_id": "nomadesk-8669b",
+    "storage_bucket": "nomadesk-8669b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:516943517371:android:e2dcad442816ec68",
+        "android_client_info": {
+          "package_name": "com.easycore.nomadesk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "516943517371-3pcosp0sauj72gaeom13mf2u4n583urv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5JYjhbP8H-4RUvO73Up_BPoHzuQ3V7DE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
