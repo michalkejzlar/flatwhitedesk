@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">NOMADESK</string>
+	<string name="app_name">NOMADESK</string>
+
+	<string name="title_activity_venue_detail">VenueDetailActivity</string>
+	<string name="dummy_button">Dummy Button</string>
+	<string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>
