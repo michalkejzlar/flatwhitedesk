@@ -1,8 +1,9 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "24.0.4"
+    buildToolsVersion "24.0.3"
     defaultConfig {
         applicationId "com.easycore.nomadesk"
         minSdkVersion 15
@@ -25,9 +26,21 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    compile 'com.google.firebase:firebase-database:9.6.1'
+
     compile 'com.android.support:appcompat-v7:24.2.1'
+    compile 'com.android.support:appcompat-v7:24.2.1'
+    compile 'com.google.firebase:firebase-database:9.6.1'
+    compile 'com.android.support:cardview-v7:24.2.1'
+    compile 'com.android.support:design:24.2.1'
+    compile 'com.android.support:recyclerview-v7:24.2.1'
+    compile 'com.android.support:gridlayout-v7:24.2.1'
+    compile 'com.jakewharton:butterknife:8.1.0'
+    apt 'com.jakewharton:butterknife-compiler:8.1.0'
+    compile 'io.reactivex:rxjava:1.1.5'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.android.support:support-v4:24.2.1'
     testCompile 'junit:junit:4.12'
+    provided 'org.glassfish:javax.annotation:10.0-b28'
 }
 
 apply plugin: 'com.google.gms.google-services'
