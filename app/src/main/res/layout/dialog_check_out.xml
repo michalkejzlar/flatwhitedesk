@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_marginTop="-10dp"
+        android:id="@+id/venue_imv_picture"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:src="@drawable/cws1" />
+
+    <LinearLayout
+        android:id="@+id/venue_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="8dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="5dp"
+        android:paddingTop="8dp">
+
+        <TextView
+            android:id="@+id/venue_txv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#444"
+            android:textSize="23sp"
+            tools:text="Title"
+            android:layout_gravity="center"
+            android:fontFamily="sans-serif-black"/>
+
+        <TextView
+            android:id="@+id/txv_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="25sp"
+            android:gravity="center"
+            tools:text="0.5 £"
+            android:padding="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#444"
+            android:textSize="20sp"
+            android:fontFamily="sans-black"
+            android:gravity="center"
+            android:layout_marginTop="15dp"
+            android:text="Did you like this place?"/>
+
+        <RatingBar
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:id="@+id/ratingBar"
+            android:numStars="5"
+            android:stepSize="1"
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:rating="3"
+            android:layout_marginTop="6dp"
+            android:isIndicator="false"/>
+
+        <Button
+            android:id="@+id/btn_send"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_gravity="bottom"
+            android:background="?attr/colorPrimary"
+            android:textColor="@color/buttonTextColor"
+            android:text="Send"
+            android:layout_marginTop="40dp"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

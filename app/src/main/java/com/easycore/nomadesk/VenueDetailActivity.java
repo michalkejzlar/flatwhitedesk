@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,6 +14,9 @@ import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -23,6 +27,7 @@ import com.easycore.nomadesk.model.Venue;
 import com.easycore.nomadesk.widget.AuthorTextView;
 import com.easycore.nomadesk.widget.BaselineGridTextView;
 import com.easycore.nomadesk.widget.CircularImageView;
+import com.easycore.nomadesk.dialogs.CheckOutDialog;
 import com.easycore.nomadesk.widget.RatingLayout;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -50,6 +55,11 @@ public class VenueDetailActivity extends AppCompatActivity implements OnMapReady
     @BindView(R.id.commentsLayout) LinearLayout commentsLayout;
 
     private Venue venue;
+
+    @BindView(R.id.check_out_container) ViewGroup checkOutContainer;
+    @BindView(R.id.btn_check_out) Button btnCheckOut;
+    @BindView(R.id.btn_check_in) Button btnCheckIn;
+    @BindView(R.id.chronometer) Chronometer chronometer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +90,35 @@ public class VenueDetailActivity extends AppCompatActivity implements OnMapReady
         setupComment("Chris Doe", "chris.jpg", "3 hours ago", "\"Very beautiful place. Highly recommended!\"");
         setupComment("Jane Nowak", "jane.jpg", "7 hours ago", "\"Excellent coffee, quite space for Skype calls. Thumbs up!\"");
         setupComment("Peter Stone", "peter.jpg", "2 days ago", "\"Had a great time with Mike, the bartender! \"");
+
+        if (venue.getReviews() == null || venue.getReviews().getReviews() == null){
+            ratingLayout.setRating(4.3f, 850);
+        } else {
+            ratingLayout.setRating((float) venue.getReviews().getAvgStars(), venue.getReviews().getReviews().size());
+        }
+        setOpeningHours("(8:30 - 18:00)", "OPENED");
+
+        btnCheckIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ViewUtils.gone(btnCheckIn);
+                ViewUtils.visible(checkOutContainer);
+                chronometer.setBase(SystemClock.elapsedRealtime());
+                chronometer.start();
+            }
+        });
+        btnCheckOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ViewUtils.gone(checkOutContainer);
+                ViewUtils.visible(btnCheckIn);
+                String burnedTime = chronometer.getText().toString();
+                CheckOutDialog checkOutDialog = new CheckOutDialog();
+                checkOutDialog.setTitle(venue.getName());
+                checkOutDialog.setBurnedTime(burnedTime);
+                checkOutDialog.show(getSupportFragmentManager(), "");
+            }
+        });
     }
 
     private void setupActionbar() {
