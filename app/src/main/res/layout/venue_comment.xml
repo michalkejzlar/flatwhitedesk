@@ -15,7 +15,7 @@
   limitations under the License.
   -->
 
-<io.plaidapp.ui.widget.ForegroundRelativeLayout
+<com.easycore.nomadesk.widget.ForegroundRelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -30,7 +30,7 @@
     android:stateListAnimator="@animator/comment_selection"
     android:descendantFocusability="blocksDescendants">
 
-    <io.plaidapp.ui.widget.CircularImageView
+    <com.easycore.nomadesk.widget.CircularImageView
         android:id="@+id/player_avatar"
         android:layout_width="@dimen/avatar_bounds"
         android:layout_height="@dimen/avatar_bounds"
@@ -43,7 +43,7 @@
         android:src="@drawable/avatar_placeholder"
         android:foreground="@drawable/avatar_ripple" />
 
-    <io.plaidapp.ui.widget.BaselineGridTextView
+    <com.easycore.nomadesk.widget.BaselineGridTextView
         android:id="@+id/comment_time_ago"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
         android:layout_alignParentEnd="true"
         tools:text="3 hours ago" />
 
-    <io.plaidapp.ui.widget.AuthorTextView
+    <com.easycore.nomadesk.widget.AuthorTextView
         android:id="@+id/comment_author"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
         android:ellipsize="end"
         tools:text="Nick B" />
 
-    <io.plaidapp.ui.widget.BaselineGridTextView
+    <com.easycore.nomadesk.widget.BaselineGridTextView
         android:id="@+id/comment_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -71,19 +71,4 @@
         android:layout_alignParentEnd="true"
         tools:text="Blah blah blah blah blah blah blah blah blah blah blah blah blah"/>
 
-    <com.easy
-        android:id="@+id/comment_likes_count"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/comment_actions_height"
-        android:padding="@dimen/spacing_normal"
-        android:paddingTop="@dimen/spacing_normal"
-        android:layout_marginEnd="@dimen/comment_like_margin_adjustment"
-        android:gravity="end|center_vertical"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@id/comment_text"
-        android:textColor="@color/dark_icon"
-        android:text="0"
-        android:background="?android:selectableItemBackgroundBorderless"
-        android:visibility="gone"  />
-
-</io.plaidapp.ui.widget.ForegroundRelativeLayout>
+</com.easycore.nomadesk.widget.ForegroundRelativeLayout>

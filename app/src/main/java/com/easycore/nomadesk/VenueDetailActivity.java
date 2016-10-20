@@ -12,10 +12,14 @@ import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.bumptech.glide.Glide;
+import com.easycore.nomadesk.widget.AuthorTextView;
+import com.easycore.nomadesk.widget.BaselineGridTextView;
+import com.easycore.nomadesk.widget.CircularImageView;
 import com.easycore.nomadesk.widget.RatingLayout;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -38,6 +42,8 @@ public class VenueDetailActivity extends AppCompatActivity implements OnMapReady
     @BindView(R.id.availabilityTextView) TextView availabilityTextView;
     @BindView(R.id.openingHoursTextView) TextView openingHoursTextView;
 
+    @BindView(R.id.commentsLayout) LinearLayout commentsLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +58,11 @@ public class VenueDetailActivity extends AppCompatActivity implements OnMapReady
         setupActionbar();
         setupMap();
         ratingLayout.setRating(3.5f, 850);
-        setOpeningHours("(8:30 - 18:00)", "OPENED");
+        setOpeningHours("(8:30 - 18:00)", "OPEN");
+
+        setupComment("Chris Doe", "chris.jpg", "3 hours ago", "Very beautiful place. Highly recommended!");
+        setupComment("Jane Nowak", "jane.jpg", "7 hours ago", "Very beautiful place. Highly recommended!");
+        setupComment("Peter Stone", "peter.jpg", "2 days ago", "Very beautiful place. Highly recommended!");
     }
 
     private void setupActionbar() {
@@ -87,6 +97,26 @@ public class VenueDetailActivity extends AppCompatActivity implements OnMapReady
 
         availabilityTextView.setText(wordtoSpan);
         openingHoursTextView.setText(hours);
+    }
+
+    private void setupComment(final String author,
+                              final String picture,
+                              final String time,
+                              final String comment) {
+
+        final View view = View.inflate(this, R.layout.venue_comment, null);
+        CircularImageView imageView = (CircularImageView) view.findViewById(R.id.player_avatar);
+        BaselineGridTextView timeAgo = (BaselineGridTextView) view.findViewById(R.id.comment_time_ago);
+        timeAgo.setText(time);
+        AuthorTextView authorTextView = (AuthorTextView) view.findViewById(R.id.comment_author);
+        authorTextView.setText(author);
+        BaselineGridTextView commentsTextView = (BaselineGridTextView) view.findViewById(R.id.comment_text);
+        commentsTextView.setText(comment);
+        commentsLayout.addView(view);
+        Glide.with(this)
+                .loadFromMediaStore(Uri.parse("file:///android_asset/" + picture))
+                .centerCrop()
+                .into(imageView);
     }
 
     @Override
