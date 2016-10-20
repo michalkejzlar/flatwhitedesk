@@ -23,10 +23,8 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.pager)
     protected ViewPager mPager;
-
     @BindView(R.id.tabs)
     protected TabLayout mTabs;
-
     private PagerAdapter pagerAdapter;
 
     @Override
@@ -55,10 +53,13 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            switch (position){
-                case 0: return new VenuesFragment();
-                case 1: return new QrFragment();
-                default:return null;
+            switch (position) {
+                case 0:
+                    return new VenuesFragment();
+                case 1:
+                    return new QrFragment();
+                default:
+                    return null;
             }
         }
 
@@ -67,15 +68,16 @@ public class MainActivity extends AppCompatActivity {
             return 2;
         }
 
-        public View getTabView(int position){
+        public View getTabView(int position) {
             View view = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE))
                     .inflate(R.layout.custom_tab, null, false);
             ImageView icon = (ImageView) view.findViewById(R.id.icon);
-            switch (position){
+            switch (position) {
                 case 0:
-//                    icon.setImageDrawable(android.R.drawable.ic);
+                    icon.setImageDrawable(context.getDrawable(R.drawable.ic_home));
                     break;
                 case 1:
+                    icon.setImageDrawable(context.getDrawable(R.drawable.ic_qr));
                     break;
             }
             return view;
