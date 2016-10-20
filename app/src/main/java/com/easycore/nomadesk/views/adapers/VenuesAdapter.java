@@ -6,6 +6,7 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.ColorMatrixColorFilter;
+import android.location.Location;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,17 +28,19 @@ import com.easycore.nomadesk.model.Parameters;
 import com.easycore.nomadesk.model.Review;
 import com.easycore.nomadesk.model.Reviews;
 import com.easycore.nomadesk.model.Venue;
+import com.easycore.nomadesk.widget.RatingLayout;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static android.R.attr.host;
 import static com.easycore.nomadesk.AnimUtils.getFastOutSlowInInterpolator;
 
 /**
@@ -49,6 +52,7 @@ public class VenuesAdapter extends RecyclerView.Adapter<VenuesAdapter.VenueViewH
     private final DatabaseReference mFirebaseDatabaseReference;
     private final Context context;
     private Callback callback;
+    private Location currentLocation;
 
     public interface Callback {
         void onVenueClicked(Venue venue);
@@ -59,6 +63,11 @@ public class VenuesAdapter extends RecyclerView.Adapter<VenuesAdapter.VenueViewH
         this.context = context;
         this.callback = callback;
         venues = new ArrayList<>();
+        currentLocation = new Location("");
+        currentLocation.setAccuracy(1);
+        currentLocation.setAltitude(200);
+        currentLocation.setLatitude(51.502991);
+        currentLocation.setLongitude(0);
         mFirebaseDatabaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -168,7 +177,16 @@ public class VenuesAdapter extends RecyclerView.Adapter<VenuesAdapter.VenueViewH
                     venue.setReviews(r);
                 }
 
+                if (dataSnapshot.hasChild("pictures")){
+                    DataSnapshot pictures = dataSnapshot.child("pictures");
+                    for (DataSnapshot ds : pictures.getChildren()){
+                        venue.getPicturesUrls().add(ds.getValue().toString());
+                    }
+                }
+
+                venue.computeDistance(currentLocation);
                 venues.add(venue);
+                Collections.sort(venues);
                 notifyDataSetChanged();
             }
 
@@ -213,10 +231,23 @@ public class VenuesAdapter extends RecyclerView.Adapter<VenuesAdapter.VenueViewH
         });
 
         holder.txvName.setText(venue.getName());
+        if (venue.getReviews() != null) {
+            holder.ratingLayout.setVisibility(View.VISIBLE);
+            holder.ratingLayout.setRating((float) venue.getReviews().getAvgStars(), venue.getReviews().getReviews().size());
+        } else {
+            holder.ratingLayout.setVisibility(View.GONE);
+        }
+
+        double miles = venue.getDistance() * 0.000621371192;
+        if (miles < 10){
+            holder.txvDistance.setText(String.format(Locale.UK, "%.1f mi", miles));
+        } else {
+            holder.txvDistance.setText(String.format(Locale.UK, "%.0f mi", miles));
+        }
 
 
         Glide.with(context)
-                .load(getFakePictureUrl())
+                .load(venue.getPicturesUrls().isEmpty() ? getFakePictureUrl() : venue.getPicturesUrls().get(0))
                 .centerCrop()
                 .listener(new RequestListener<String, GlideDrawable>() {
 
@@ -266,31 +297,33 @@ public class VenuesAdapter extends RecyclerView.Adapter<VenuesAdapter.VenueViewH
         return venues.size();
     }
 
-    public static String getFakePictureUrl(){
-        double random = Math.random()*10;
-        if (random < 2.5){
+    public static String getFakePictureUrl() {
+        double random = Math.random() * 10;
+        if (random < 2.5) {
             return "http://www.launchablemag.com/assets/images/upload/Inspire9-coworking5523-space-1-873860efa01f35f8937e82aa706b4d10.jpg";
         }
-        if (random < 5){
+        if (random < 5) {
             return "https://cdn.cheapoguides.com/wp-content/uploads/sites/2/2015/04/mov_005.jpg";
         }
-        if (random < 7.5){
+        if (random < 7.5) {
             return "https://artconnect.s3-eu-west-1.amazonaws.com/attachments/91819/original.jpg?1429015018";
-        }
-        else {
+        } else {
             return "http://s3.amazonaws.com/media.skillcrush.com/skillcrush/wp-content/uploads/2014/07/coworking-space.jpg";
         }
     }
 
     public static class VenueViewHolder extends RecyclerView.ViewHolder {
 
+        @BindView(R.id.venue_container)
+        public ViewGroup container;
         @BindView(R.id.venue_txv_name)
         public TextView txvName;
         @BindView(R.id.venue_imv_picture)
         public ImageView imvPicture;
-
-        @BindView(R.id.venue_container)
-        public ViewGroup container;
+        @BindView(R.id.ratingLayout)
+        public RatingLayout ratingLayout;
+        @BindView(R.id.venue_txv_distance)
+        public TextView txvDistance;
 
         public VenueViewHolder(View itemView) {
             super(itemView);
