@@ -12,6 +12,7 @@
 			  android:layout_width="match_parent"
 			  android:layout_height="wrap_content"
 			  android:text="Workshop coffee San Fransisco!"
+			  android:layout_marginTop="6dp"
 			  android:textSize="30sp"
 			  android:letterSpacing="0.02"
 			  android:textColor="#444"
@@ -23,6 +24,52 @@
 			android:layout_height="wrap_content"
 			android:paddingTop="8dp"
 			android:paddingBottom="8dp"/>
+
+	<View android:layout_width="match_parent"
+		  android:layout_height="1px"
+		  android:layout_marginTop="6dp"
+		  android:layout_marginBottom="6dp"
+		  android:background="#444"/>
+
+	<LinearLayout android:layout_width="match_parent"
+				  android:layout_height="wrap_content"
+				  android:gravity="center"
+				  android:paddingTop="15dp"
+				  android:paddingBottom="15dp"
+				  android:orientation="horizontal">
+
+		<ImageView android:layout_width="wrap_content"
+				  android:layout_height="wrap_content"
+				  android:layout_marginLeft="@dimen/tag_size_margin"
+				  android:layout_marginRight="@dimen/tag_size_margin"
+				  android:src="@drawable/ic_printer"/>
+
+		<ImageView android:layout_width="wrap_content"
+				  android:layout_height="wrap_content"
+				  android:layout_marginLeft="@dimen/tag_size_margin"
+				  android:layout_marginRight="@dimen/tag_size_margin"
+				  android:src="@drawable/ic_skype"/>
+
+		<ImageView android:layout_width="wrap_content"
+				  android:layout_height="wrap_content"
+				  android:layout_marginLeft="@dimen/tag_size_margin"
+				  android:layout_marginRight="@dimen/tag_size_margin"
+				  android:src="@drawable/ic_wired_internet"/>
+
+		<ImageView android:layout_width="wrap_content"
+				  android:layout_height="wrap_content"
+				  android:layout_marginLeft="@dimen/tag_size_margin"
+				  android:layout_marginRight="@dimen/tag_size_margin"
+				  android:src="@drawable/ic_tv"/>
+
+	</LinearLayout>
+
+
+	<View android:layout_width="match_parent"
+		  android:layout_height="1px"
+		  android:layout_marginTop="6dp"
+		  android:layout_marginBottom="6dp"
+		  android:background="#444"/>
 
 
 </LinearLayout>

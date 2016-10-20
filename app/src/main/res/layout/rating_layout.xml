@@ -18,6 +18,8 @@
 	<TextView android:id="@+id/ratingLabel"
 			  android:layout_width="wrap_content"
 			  android:layout_height="wrap_content"
+			  android:textColor="#444"
+			  android:fontFamily="sans-serif-light"
 			  android:layout_marginLeft="6dp"
 			  android:layout_marginStart="6dp"/>
 

@@ -9,4 +9,7 @@
     <dimen name="z_app_bar">4dp</dimen>
     <dimen name="z_fab">6dp</dimen>
     <dimen name="touch_raise">9dp</dimen>
+
+    <dimen name="tag_size">35dp</dimen>
+    <dimen name="tag_size_margin">30dp</dimen>
 </resources>
