@@ -60,9 +60,9 @@ public class VenueDetailActivity extends AppCompatActivity implements OnMapReady
         ratingLayout.setRating(3.5f, 850);
         setOpeningHours("(8:30 - 18:00)", "OPEN");
 
-        setupComment("Chris Doe", "chris.jpg", "3 hours ago", "Very beautiful place. Highly recommended!");
-        setupComment("Jane Nowak", "jane.jpg", "7 hours ago", "Very beautiful place. Highly recommended!");
-        setupComment("Peter Stone", "peter.jpg", "2 days ago", "Very beautiful place. Highly recommended!");
+        setupComment("Chris Doe", "chris.jpg", "3 hours ago", "\"Very beautiful place. Highly recommended!\"");
+        setupComment("Jane Nowak", "jane.jpg", "7 hours ago", "\"Excellent coffee, quite space for Skype calls. Thumbs up!\"");
+        setupComment("Peter Stone", "peter.jpg", "2 days ago", "\"Had a great time with Mike, the bartender! \"");
     }
 
     private void setupActionbar() {
