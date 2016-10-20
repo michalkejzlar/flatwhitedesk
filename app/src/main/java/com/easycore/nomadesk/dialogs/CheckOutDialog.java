@@ -38,7 +38,7 @@ public class CheckOutDialog extends DialogFragment {
         ButterKnife.bind(this, v);
 
         txvTitle.setText(title);
-        txvPrice.setText(String.format("%s / 0.5 £", burnedTime));
+        txvPrice.setText(String.format("%s / 0.25 £", burnedTime));
 
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
