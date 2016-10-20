@@ -138,13 +138,11 @@ public class VenueDetailActivity extends AppCompatActivity implements OnMapReady
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        String[] arr = venue.getLoc().split(",");
-        LatLng latLng = new LatLng(Double.valueOf(arr[0]), Double.valueOf(arr[1]));
-
-        LatLng sydney = new LatLng(-34, 151);
+        final String[] arr = venue.getLoc().split(",");
+        final LatLng target = new LatLng(Double.valueOf(arr[0]), Double.valueOf(arr[1]));
 
         googleMap.getUiSettings().setAllGesturesEnabled(false);
-        googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        googleMap.addMarker(new MarkerOptions().position(target).title(venue.getName()));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(target, 15.0f));
     }
 }
