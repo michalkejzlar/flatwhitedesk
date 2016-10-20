@@ -42,7 +42,8 @@ public class RatingLayout extends LinearLayout {
     public void setRating(@FloatRange(from = 0.0, to = 5.0) final float rating,
                           final int numberOfReviewers) {
         ratingBar.setRating(rating);
-        ratingLabel.setText(String.format(Locale.getDefault(), "%d reviewers", numberOfReviewers));
+        String label = numberOfReviewers == 1 ? "reviewer" : "reviewers";
+        ratingLabel.setText(String.format(Locale.getDefault(), "%d %s", numberOfReviewers, label));
         requestLayout();
     }
 

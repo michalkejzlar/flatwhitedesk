@@ -1,5 +1,7 @@
 package com.easycore.nomadesk;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,6 +19,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.bumptech.glide.Glide;
+import com.easycore.nomadesk.model.Venue;
 import com.easycore.nomadesk.widget.AuthorTextView;
 import com.easycore.nomadesk.widget.BaselineGridTextView;
 import com.easycore.nomadesk.widget.CircularImageView;
@@ -30,19 +33,23 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class VenueDetailActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-    @BindView(R.id.venuePictureImageView) ImageView venuePictureImageView;
+    public static void start(Context context, Venue venue) {
+        Intent intent = new Intent(context, VenueDetailActivity.class);
+        intent.putExtra("venue", venue);
+        context.startActivity(intent);
+    }
 
+    @BindView(R.id.venuePictureImageView) ImageView venuePictureImageView;
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.backdrop_toolbar) CollapsingToolbarLayout backdropToolbar;
-
     @BindView(R.id.venueNameTextView) TextView venueNameTextView;
     @BindView(R.id.ratingLayout) RatingLayout ratingLayout;
     @BindView(R.id.shortDescTextView) TextView shortDescTextView;
-
     @BindView(R.id.availabilityTextView) TextView availabilityTextView;
     @BindView(R.id.openingHoursTextView) TextView openingHoursTextView;
-
     @BindView(R.id.commentsLayout) LinearLayout commentsLayout;
+
+    private Venue venue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,14 +57,24 @@ public class VenueDetailActivity extends AppCompatActivity implements OnMapReady
         setContentView(R.layout.activity_venue_detail);
         ButterKnife.bind(this);
 
+        this.venue = getIntent().getParcelableExtra("venue");
+
         Glide.with(this)
-                .loadFromMediaStore(Uri.parse("file:///android_asset/sample_venue.jpg"))
+                .load(venue.getPicturesUrls().get(0))
                 .centerCrop()
                 .into(venuePictureImageView);
 
+        venueNameTextView.setText(venue.getName());
         setupActionbar();
         setupMap();
-        ratingLayout.setRating(3.5f, 850);
+
+        if (venue.getReviews() != null) {
+            ratingLayout.setRating((float) venue.getReviews().getAvgStars(),
+                    venue.getReviews().getReviews().size());
+        } else {
+            ratingLayout.setRating(0.0f, 0);
+        }
+
         setOpeningHours("(8:30 - 18:00)", "OPEN");
 
         setupComment("Chris Doe", "chris.jpg", "3 hours ago", "\"Very beautiful place. Highly recommended!\"");
@@ -121,6 +138,9 @@ public class VenueDetailActivity extends AppCompatActivity implements OnMapReady
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        String[] arr = venue.getLoc().split(",");
+        LatLng latLng = new LatLng(Double.valueOf(arr[0]), Double.valueOf(arr[1]));
+
         LatLng sydney = new LatLng(-34, 151);
 
         googleMap.getUiSettings().setAllGesturesEnabled(false);

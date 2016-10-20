@@ -1,7 +1,6 @@
 package com.easycore.nomadesk.views.fragments;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,16 +8,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.easycore.nomadesk.R;
 import com.easycore.nomadesk.VenueDetailActivity;
 import com.easycore.nomadesk.model.Venue;
 import com.easycore.nomadesk.views.adapers.VenuesAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,6 +52,7 @@ public class VenuesFragment extends Fragment implements VenuesAdapter.Callback{
 
     @Override
     public void onVenueClicked(Venue venue) {
-        getActivity().startActivity(new Intent(getActivity(), VenueDetailActivity.class));
+        VenueDetailActivity.start(getActivity(), venue);
+
     }
 }
