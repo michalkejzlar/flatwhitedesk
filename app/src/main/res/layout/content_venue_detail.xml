@@ -2,10 +2,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 			  android:orientation="vertical"
 			  android:layout_width="match_parent"
-			  android:layout_height="match_parent">
+			  android:layout_height="match_parent"
+			  android:paddingLeft="@dimen/activity_horizontal_margin"
+			  android:paddingRight="@dimen/activity_horizontal_margin"
+			  android:paddingStart="@dimen/activity_horizontal_margin"
+			  android:paddingEnd="@dimen/activity_horizontal_margin">
 
 	<TextView android:id="@+id/venueNameTextView"
 			  android:layout_width="match_parent"
-			  android:layout_height="wrap_content"/>
+			  android:layout_height="wrap_content"
+			  android:text="Workshop coffee San Fransisco!"
+			  android:textSize="30sp"
+			  android:letterSpacing="0.02"
+			  android:textColor="#444"
+			  android:fontFamily="sans-serif-black"/>
+
+	<com.easycore.nomadesk.widget.RatingLayout
+			android:id="@+id/ratingLayout"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:paddingTop="8dp"
+			android:paddingBottom="8dp"/>
+
 
 </LinearLayout>

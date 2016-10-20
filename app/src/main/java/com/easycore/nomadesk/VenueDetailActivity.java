@@ -11,6 +11,7 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.bumptech.glide.Glide;
+import com.easycore.nomadesk.widget.RatingLayout;
 
 public class VenueDetailActivity extends AppCompatActivity {
 
@@ -20,6 +21,7 @@ public class VenueDetailActivity extends AppCompatActivity {
     @BindView(R.id.backdrop_toolbar) CollapsingToolbarLayout backdropToolbar;
 
     @BindView(R.id.venueNameTextView) TextView venueNameTextView;
+    @BindView(R.id.ratingLayout) RatingLayout ratingLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +35,8 @@ public class VenueDetailActivity extends AppCompatActivity {
                 .into(venuePictureImageView);
 
         setupActionbar();
+        ratingLayout.setRating(3.5f, 850);
 
-        venueNameTextView.setText("Workshop coffee San Fransisco!");
     }
 
     private void setupActionbar() {

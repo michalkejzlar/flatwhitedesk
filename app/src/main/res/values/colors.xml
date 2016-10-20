@@ -14,4 +14,6 @@
 
     <color name="mid_grey">#40808080</color>
     <color name="light_grey">#fff5f5f5</color>
+
+    <color name="starColor">#f9c63c</color>
 </resources>

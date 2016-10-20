@@ -22,4 +22,12 @@
 		<item name="android:windowTranslucentStatus">true</item>
 	</style>
 
+	<style name="VenueRatingBar" parent="@style/Widget.AppCompat.RatingBar">
+		<item name="android:progressTint">@color/starColor</item>
+	</style>
+
+	<style name="VenueRatingBar.Small" parent="@style/Widget.AppCompat.RatingBar.Small">
+		<item name="android:progressTint">@color/starColor</item>
+	</style>
+
 </resources>
