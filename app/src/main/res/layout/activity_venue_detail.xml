@@ -49,5 +49,13 @@
 
 	</android.support.v4.widget.NestedScrollView>
 
+	<Button android:layout_width="match_parent"
+			android:layout_height="56dp"
+			android:layout_gravity="bottom"
+			android:background="?attr/colorPrimary"
+			android:foreground="?attr/selectableItemBackground"
+			android:textColor="@color/buttonTextColor"
+			android:text="Book space"/>
+
 </android.support.design.widget.CoordinatorLayout>
 

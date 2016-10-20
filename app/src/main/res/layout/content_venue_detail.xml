@@ -58,6 +58,16 @@
 			  android:gravity="center"
 			  android:text="&quot;Small cozzy place just on the corner of 27 Clerkenwell Road.&quot;"/>
 
+	<TextView android:id="@+id/availabilityTextView"
+			  android:layout_width="wrap_content"
+			  android:layout_height="wrap_content"
+			  tools:text="Currently "/>
+
+	<TextView android:id="@+id/openingHoursTextView"
+			  android:layout_width="wrap_content"
+			  android:layout_height="wrap_content"
+			  tools:text="(9:00 - 17:00)"/>
+
 	<fragment
 			  android:id="@+id/map"
 			  android:layout_width="match_parent"

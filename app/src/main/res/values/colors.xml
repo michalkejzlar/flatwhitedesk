@@ -16,6 +16,10 @@
     <color name="light_grey">#fff5f5f5</color>
 
     <color name="starColor">#f9c63c</color>
-
     <color name="tag_color">#aaa</color>
+    <color name="content_placeholder">#ffe0e0e0</color>
+    <color name="availabilityOpened">#45b32f</color>
+    <color name="availabilityClosed">#dc3347</color>
+    <color name="dark_icon">#99000000</color> <!-- 60% black-->
+
 </resources>
