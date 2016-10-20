@@ -22,6 +22,7 @@ public class VenueDetailActivity extends AppCompatActivity {
 
     @BindView(R.id.venueNameTextView) TextView venueNameTextView;
     @BindView(R.id.ratingLayout) RatingLayout ratingLayout;
+    @BindView(R.id.shortDescTextView) TextView shortDescTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
