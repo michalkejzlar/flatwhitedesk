@@ -1,6 +1,7 @@
 package com.easycore.nomadesk.views.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.easycore.nomadesk.R;
+import com.easycore.nomadesk.VenueDetailActivity;
 import com.easycore.nomadesk.model.Venue;
 import com.easycore.nomadesk.views.adapers.VenuesAdapter;
 import com.google.firebase.database.DatabaseReference;
@@ -53,6 +55,6 @@ public class VenuesFragment extends Fragment implements VenuesAdapter.Callback{
 
     @Override
     public void onVenueClicked(Venue venue) {
-        // TODO: 20.10.16
+        getActivity().startActivity(new Intent(getActivity(), VenueDetailActivity.class));
     }
 }
