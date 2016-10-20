@@ -26,8 +26,7 @@
 		<activity
 				android:name=".VenueDetailActivity"
 				android:configChanges="orientation|keyboardHidden|screenSize"
-				android:label="@string/title_activity_venue_detail"
-				android:theme="@style/Nomadesk.Fullscreen">
+				android:label="@string/title_activity_venue_detail">
 		</activity>
 		<meta-data
 				android:name="com.google.android.geo.API_KEY"
