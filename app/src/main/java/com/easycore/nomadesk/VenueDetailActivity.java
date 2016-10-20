@@ -91,11 +91,6 @@ public class VenueDetailActivity extends AppCompatActivity implements OnMapReady
         setupComment("Jane Nowak", "jane.jpg", "7 hours ago", "\"Excellent coffee, quite space for Skype calls. Thumbs up!\"");
         setupComment("Peter Stone", "peter.jpg", "2 days ago", "\"Had a great time with Mike, the bartender! \"");
 
-        if (venue.getReviews() == null || venue.getReviews().getReviews() == null){
-            ratingLayout.setRating(4.3f, 850);
-        } else {
-            ratingLayout.setRating((float) venue.getReviews().getAvgStars(), venue.getReviews().getReviews().size());
-        }
         setOpeningHours("(8:30 - 18:00)", "OPENED");
 
         btnCheckIn.setOnClickListener(new View.OnClickListener() {
