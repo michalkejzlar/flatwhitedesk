@@ -5,30 +5,32 @@
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:background="@color/background_light"
-		tools:context=".VenueDetailActivity"
-		android:fitsSystemWindows="true">
+		tools:context=".VenueDetailActivity">
 
 	<android.support.design.widget.AppBarLayout
 			android:layout_width="match_parent"
-			android:layout_height="250dp"
-			android:theme="@style/NomadeskDarkOverlay">
+			android:layout_height="240dp"
+			android:theme="@style/NomadeskDarkOverlay"
+			android:fitsSystemWindows="true">
 
 		<android.support.design.widget.CollapsingToolbarLayout
 				android:id="@+id/backdrop_toolbar"
 				android:layout_width="match_parent"
 				android:layout_height="match_parent"
-				android:minHeight="@dimen/extended_height_toolbar"
-				android:elevation="@dimen/z_app_bar"
 				android:theme="@style/NomadeskDarkOverlay"
-				android:fitsSystemWindows="true"
 				app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+			<ImageView android:id="@+id/venuePictureImageView"
+					   android:layout_width="match_parent"
+					   android:layout_height="match_parent"
+					   app:layout_collapseMode="pin"
+					   android:fitsSystemWindows="true"/>
 
 			<android.support.v7.widget.Toolbar
 					android:id="@+id/toolbar"
 					android:layout_width="match_parent"
 					android:layout_height="?attr/actionBarSize"
 					android:navigationIcon="@drawable/ic_arrow_back"
-					android:elevation="@dimen/z_fab"
 					android:contentInsetStart="@dimen/keyline_1"
 					android:contentInsetEnd="@dimen/activity_vertical_margin"
 					app:layout_collapseMode="pin"/>
@@ -41,7 +43,11 @@
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
 			android:background="#ffe5e5e5"
-			app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+			app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+		<include layout="@layout/content_venue_detail" android:id="@+id/content"/>
+
+	</android.support.v4.widget.NestedScrollView>
 
 </android.support.design.widget.CoordinatorLayout>
 

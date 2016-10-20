@@ -20,7 +20,7 @@
 				android:name=".VenueDetailActivity"
 				android:configChanges="orientation|keyboardHidden|screenSize"
 				android:label="@string/title_activity_venue_detail"
-				android:theme="@style/FullscreenTheme">
+				android:theme="@style/Nomadesk.Fullscreen">
 		</activity>
 	</application>
 
