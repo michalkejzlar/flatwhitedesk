@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  xmlns:tools="http://schemas.android.com/tools"
+			  xmlns:app="http://schemas.android.com/apk/res-auto"
 			  android:orientation="vertical"
 			  android:layout_width="match_parent"
 			  android:layout_height="match_parent"
@@ -55,6 +57,13 @@
 			  android:textStyle="italic"
 			  android:gravity="center"
 			  android:text="&quot;Small cozzy place just on the corner of 27 Clerkenwell Road.&quot;"/>
+
+	<fragment
+			  android:id="@+id/map"
+			  android:layout_width="match_parent"
+			  android:layout_height="200dp"
+			  tools:context=".VenueDetailActivity"
+			  android:name="com.google.android.gms.maps.SupportMapFragment"/>
 
 
 </LinearLayout>

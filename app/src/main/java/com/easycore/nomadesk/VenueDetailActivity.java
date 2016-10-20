@@ -12,8 +12,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.bumptech.glide.Glide;
 import com.easycore.nomadesk.widget.RatingLayout;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
-public class VenueDetailActivity extends AppCompatActivity {
+public class VenueDetailActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     @BindView(R.id.venuePictureImageView) ImageView venuePictureImageView;
 
@@ -36,8 +42,8 @@ public class VenueDetailActivity extends AppCompatActivity {
                 .into(venuePictureImageView);
 
         setupActionbar();
+        setupMap();
         ratingLayout.setRating(3.5f, 850);
-
     }
 
     private void setupActionbar() {
@@ -55,4 +61,18 @@ public class VenueDetailActivity extends AppCompatActivity {
         });
     }
 
+    private void setupMap() {
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+    }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        LatLng sydney = new LatLng(-34, 151);
+        googleMap.getUiSettings().setScrollGesturesEnabled(false);
+        googleMap.getUiSettings().setZoomGesturesEnabled(false);
+        googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+    }
 }
