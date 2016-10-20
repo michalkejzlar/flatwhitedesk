@@ -21,6 +21,7 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.easycore.nomadesk.ObservableColorMatrix;
 import com.easycore.nomadesk.R;
+import com.easycore.nomadesk.ViewUtils;
 import com.easycore.nomadesk.model.Capacity;
 import com.easycore.nomadesk.model.Exception;
 import com.easycore.nomadesk.model.OpeningHours;
@@ -141,7 +142,7 @@ public class VenuesAdapter extends RecyclerView.Adapter<VenuesAdapter.VenueViewH
                     }
 
                     ArrayList<String> paramKeys = new ArrayList<>();
-                    if (params.hasChild("paramsArr")){
+                    if (params.hasChild("paramsArr")) {
                         String pArr = params.child("paramsArr").getValue().toString();
                         String[] split = pArr.split(",");
                         for (String ss : split) {
@@ -187,9 +188,9 @@ public class VenuesAdapter extends RecyclerView.Adapter<VenuesAdapter.VenueViewH
                     venue.setReviews(r);
                 }
 
-                if (dataSnapshot.hasChild("pictures")){
+                if (dataSnapshot.hasChild("pictures")) {
                     DataSnapshot pictures = dataSnapshot.child("pictures");
-                    for (DataSnapshot ds : pictures.getChildren()){
+                    for (DataSnapshot ds : pictures.getChildren()) {
                         venue.getPicturesUrls().add(ds.getValue().toString());
                     }
                 }
@@ -249,12 +250,43 @@ public class VenuesAdapter extends RecyclerView.Adapter<VenuesAdapter.VenueViewH
         }
 
         double miles = venue.getDistance() * 0.000621371192;
-        if (miles < 10){
-            holder.txvDistance.setText(String.format(Locale.UK, "%.1f mi", miles));
+        if (miles < 10) {
+            holder.txvDistance.setText(String.format(Locale.UK, "%.1f mi away", miles));
         } else {
-            holder.txvDistance.setText(String.format(Locale.UK, "%.0f mi", miles));
+            holder.txvDistance.setText(String.format(Locale.UK, "%.0f mi away", miles));
         }
 
+        if (venue.getParameters() == null || venue.getParameters().getParamKeys() == null
+                || venue.getParameters().getParamKeys().isEmpty()) {
+            holder.paramsContainer.setVisibility(View.GONE);
+        } else {
+            holder.paramsContainer.setVisibility(View.VISIBLE);
+
+            ViewUtils.visibleOrGone(
+                    venue.getParameters().containsParamKey(Parameters.PARAM_KEY_COFFEE),
+                    holder.tmvParamCoffee
+            );
+            ViewUtils.visibleOrGone(
+                    venue.getParameters().containsParamKey(Parameters.PARAM_KEY_ETHERNET),
+                    holder.tmvParamEthernet
+            );
+            ViewUtils.visibleOrGone(
+                    venue.getParameters().containsParamKey(Parameters.PARAM_KEY_MEETING_ROOM),
+                    holder.tmvParamMeetingRoom
+            );
+            ViewUtils.visibleOrGone(
+                    venue.getParameters().containsParamKey(Parameters.PARAM_KEY_PHONE_BOOTH),
+                    holder.tmvParamPhoneBooth
+            );
+            ViewUtils.visibleOrGone(
+                    venue.getParameters().containsParamKey(Parameters.PARAM_KEY_PRINTER),
+                    holder.tmvParamPrinter
+            );
+            ViewUtils.visibleOrGone(
+                    venue.getParameters().containsParamKey(Parameters.PARAM_KEY_PROJECTOR),
+                    holder.tmvParamProjector
+            );
+        }
 
         Glide.with(context)
                 .load(venue.getPicturesUrls().isEmpty() ? getFakePictureUrl() : venue.getPicturesUrls().get(0))
@@ -334,6 +366,20 @@ public class VenuesAdapter extends RecyclerView.Adapter<VenuesAdapter.VenueViewH
         public RatingLayout ratingLayout;
         @BindView(R.id.venue_txv_distance)
         public TextView txvDistance;
+        @BindView(R.id.venue_param_imv_coffee)
+        public ImageView tmvParamCoffee;
+        @BindView(R.id.venue_param_imv_ethernet)
+        public ImageView tmvParamEthernet;
+        @BindView(R.id.venue_param_imv_meeting_room)
+        public ImageView tmvParamMeetingRoom;
+        @BindView(R.id.venue_param_imv_phone_booth)
+        public ImageView tmvParamPhoneBooth;
+        @BindView(R.id.venue_param_imv_printer)
+        public ImageView tmvParamPrinter;
+        @BindView(R.id.venue_param_imv_projector)
+        public ImageView tmvParamProjector;
+        @BindView(R.id.venue_params)
+        public ViewGroup paramsContainer;
 
         public VenueViewHolder(View itemView) {
             super(itemView);

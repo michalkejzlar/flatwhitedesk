@@ -56,8 +56,8 @@ public class MainActivity extends AppCompatActivity {
             switch (position) {
                 case 0:
                     return new VenuesFragment();
-                case 1:
-                    return new QrFragment();
+//                case 1:
+//                    return new QrFragment();
                 default:
                     return null;
             }
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return 2;
+            return 1;
         }
 
         public View getTabView(int position) {
@@ -76,9 +76,9 @@ public class MainActivity extends AppCompatActivity {
                 case 0:
                     icon.setImageDrawable(context.getDrawable(R.drawable.ic_home));
                     break;
-                case 1:
-                    icon.setImageDrawable(context.getDrawable(R.drawable.ic_qr));
-                    break;
+//                case 1:
+//                    icon.setImageDrawable(context.getDrawable(R.drawable.ic_qr));
+//                    break;
             }
             return view;
         }
