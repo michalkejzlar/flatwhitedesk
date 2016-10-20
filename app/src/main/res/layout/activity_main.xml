@@ -19,6 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         app:tabIndicatorHeight="0dp"
-        app:tabBackground="@drawable/tab_color_selector"/>
+        app:tabBackground="@drawable/tab_color_selector"
+        android:visibility="gone"/>
 
 </RelativeLayout>
