@@ -140,6 +140,16 @@ public class VenuesAdapter extends RecyclerView.Adapter<VenuesAdapter.VenueViewH
                         p.setOpeningHours(oh);
                     }
 
+                    ArrayList<String> paramKeys = new ArrayList<>();
+                    if (params.hasChild("paramsArr")){
+                        String pArr = params.child("paramsArr").getValue().toString();
+                        String[] split = pArr.split(",");
+                        for (String ss : split) {
+                            paramKeys.add(ss);
+                        }
+                    }
+                    p.setParamKeys(paramKeys);
+
                     venue.setParameters(p);
                 }
 
