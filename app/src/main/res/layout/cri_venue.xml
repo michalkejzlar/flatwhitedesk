@@ -9,6 +9,7 @@
         android:id="@+id/venue_imv_picture"
         android:layout_width="match_parent"
         android:layout_height="250dp"
+        android:transitionName="picture"
         tools:src="@drawable/cws1" />
 
     <LinearLayout

@@ -14,7 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.GlideDrawable;
 import com.bumptech.glide.request.RequestListener;
@@ -22,13 +23,8 @@ import com.bumptech.glide.request.target.Target;
 import com.easycore.nomadesk.ObservableColorMatrix;
 import com.easycore.nomadesk.R;
 import com.easycore.nomadesk.ViewUtils;
-import com.easycore.nomadesk.model.Capacity;
+import com.easycore.nomadesk.model.*;
 import com.easycore.nomadesk.model.Exception;
-import com.easycore.nomadesk.model.OpeningHours;
-import com.easycore.nomadesk.model.Parameters;
-import com.easycore.nomadesk.model.Review;
-import com.easycore.nomadesk.model.Reviews;
-import com.easycore.nomadesk.model.Venue;
 import com.easycore.nomadesk.widget.RatingLayout;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -38,9 +34,6 @@ import com.google.firebase.database.DatabaseReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Locale;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 import static com.easycore.nomadesk.AnimUtils.getFastOutSlowInInterpolator;
 
@@ -56,7 +49,7 @@ public class VenuesAdapter extends RecyclerView.Adapter<VenuesAdapter.VenueViewH
     private Location currentLocation;
 
     public interface Callback {
-        void onVenueClicked(Venue venue);
+        void onVenueClicked(Venue venue, ImageView imageView);
     }
 
     public VenuesAdapter(DatabaseReference mFirebaseDatabaseReference, final Context context, Callback callback) {
@@ -237,7 +230,7 @@ public class VenuesAdapter extends RecyclerView.Adapter<VenuesAdapter.VenueViewH
         holder.container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callback.onVenueClicked(venue);
+                callback.onVenueClicked(venue, holder.imvPicture);
             }
         });
 

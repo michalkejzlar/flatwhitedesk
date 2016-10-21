@@ -1,13 +1,16 @@
 package com.easycore.nomadesk.views.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.easycore.nomadesk.R;
@@ -51,8 +54,12 @@ public class VenuesFragment extends Fragment implements VenuesAdapter.Callback{
 
 
     @Override
-    public void onVenueClicked(Venue venue) {
-        VenueDetailActivity.start(getActivity(), venue);
+    public void onVenueClicked(Venue venue, ImageView imageView) {
+        Intent intent = new Intent(getActivity(), VenueDetailActivity.class);
+        intent.putExtra("venue", venue);
+        ActivityOptionsCompat options = ActivityOptionsCompat.
+                makeSceneTransitionAnimation(getActivity(), (View) imageView, "picture");
+        startActivity(intent, options.toBundle());
 
     }
 }
