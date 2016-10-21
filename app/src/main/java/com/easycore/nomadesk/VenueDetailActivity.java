@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
@@ -15,19 +16,15 @@ import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.Chronometer;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.*;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.bumptech.glide.Glide;
+import com.easycore.nomadesk.dialogs.CheckOutDialog;
 import com.easycore.nomadesk.model.Venue;
 import com.easycore.nomadesk.widget.AuthorTextView;
 import com.easycore.nomadesk.widget.BaselineGridTextView;
 import com.easycore.nomadesk.widget.CircularImageView;
-import com.easycore.nomadesk.dialogs.CheckOutDialog;
 import com.easycore.nomadesk.widget.RatingLayout;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -140,7 +137,7 @@ public class VenueDetailActivity extends AppCompatActivity implements OnMapReady
     private void setOpeningHours(final String hours, final String availabilityNow) {
         final String label = "Currently: ";
         Spannable wordtoSpan = new SpannableString(label + availabilityNow);
-        wordtoSpan.setSpan(new ForegroundColorSpan(getColor(R.color.availabilityOpened)),
+        wordtoSpan.setSpan(new ForegroundColorSpan(ContextCompat.getColor(this, R.color.availabilityOpened)),
                 label.length(), wordtoSpan.length(),
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         wordtoSpan.setSpan(new StyleSpan(Typeface.BOLD), label.length(), wordtoSpan.length(),
@@ -178,5 +175,10 @@ public class VenueDetailActivity extends AppCompatActivity implements OnMapReady
         googleMap.getUiSettings().setAllGesturesEnabled(false);
         googleMap.addMarker(new MarkerOptions().position(target).title(venue.getName()));
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(target, 15.0f));
+    }
+
+    @Override
+    public void onBackPressed() {
+        supportFinishAfterTransition();
     }
 }
